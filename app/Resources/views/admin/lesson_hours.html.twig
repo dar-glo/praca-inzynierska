@@ -1,0 +1,26 @@
+{% block title %}Godziny lekcyjne{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gorziny lekcyjne</h1>
+    {% if lessonHours is not empty %}
+    <table>
+	<tr>
+	    <td>Początek</td>
+	    <td>Edytuj</td>
+	    <td>Usuń</td>
+	</tr>
+	{% for i in 0..lessonHours|length-1 %}
+	    <tr>
+		<td>{{ lessonHours[i].poczatek|date("G:i") }}</td>
+		<td><a href="{{ url('lesson_hours',{'id':lessonHours[i].id} ) }}">edytuj</a></td>
+		<td><a href="{{ url('lesson_hours',{'id':lessonHours[i].id,'delete':1} ) }}">usuń</a></td>
+	    </tr>
+	{% endfor %}
+    </table>
+    {% else %}
+	brak
+    {% endif %}
+    <h2>Dodawanie/edytowanie</h2>
+    {{form(form)}}
+{% endblock %}

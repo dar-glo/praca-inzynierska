@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+	{% if app.session.get('user')['user'] is defined %}
+	    {% set sessionUser=app.session.get('user')['user'] %}
+	    Zalogowany jako: {{ sessionUser.login }}<br>
+	{% endif %}
+	<b>Testowa nawigacja</b> 
+	<a href="{{url('homepage')}}">homepage</a>
+	{% if sessionUser is not defined %}
+	    <a href="{{url('login')}}">login</a>
+	{% else %}
+	    <a href="{{url('logout')}}">logout</a>
+	    <a href="{{url('messages')}}">
+		messages {% if newMessages is defined %} ({{ newMessages }}) {% endif %} 
+	    </a> 
+	{% endif %}
+	{% if app.session.get('admin')['defined'] is defined %}
+	    <a href="{{url('users')}}">users</a> 
+	    <a href="{{url('classes')}}">classes</a>
+	    <a href="{{url('class')}}">class</a>
+	    <a href="{{url('subjects')}}">subjects</a>
+	    <a href="{{url('lesson_hours')}}">lesson_hours</a>
+	    <a href="{{url('rooms')}}">rooms</a>
+	    <a href="{{url('time_table')}}">time_table</a>
+<<<<<<< HEAD
+=======
+	    <a href="{{url('settings')}}">settings</a>
+>>>>>>> eksport i import bazy oraz przerwa techniczna
+	{% endif %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

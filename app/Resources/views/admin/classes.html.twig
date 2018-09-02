@@ -1,0 +1,31 @@
+{% block title %}Klasy{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Klasy:</h1>
+    {% if classes is not empty %}
+	<table>
+	    <tr>
+		<td>Poziom</td>
+		<td>Klasa</td>
+		<td>Rocznik</td>
+		<td>Wychowawca</td>
+		<td>Edytuj</td>
+		<td>Usuń</td>
+	    </tr>
+	    {% for i in 0..classes|length-1 %}
+		<tr>
+		    <td>{{ classes[i].poziom }}</td>
+		    <td>{{ classes[i].klasa }}</td>
+		    <td>{{ classes[i].rocznik }}</td>
+		    <td>{{ classes[i].wychowawca.imie }} {{ classes[i].wychowawca.nazwisko }}</td>
+		    <td><a href="{{ url('classes',{'id':classes[i].id}) }}">edytuj</a></td>
+		    <td><a href="{{ url('classes',{'id':classes[i].id,'delete':1}) }}">usuń</a></td>
+		</tr>
+	    {% endfor %}
+	</table>
+    {% else %}
+	brak
+    {% endif %}
+    {{form(form)}}
+{% endblock %}

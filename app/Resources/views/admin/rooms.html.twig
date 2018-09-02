@@ -1,0 +1,28 @@
+{% block title %}Sale{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Przedmioty</h1>
+    {% if rooms is not empty %}
+    <table>
+	<tr>
+	    <td>Nr sali</td>
+	    <td>Opis</td>
+	    <td>Edytuj</td>
+	    <td>Usuń</td>
+	</tr>
+	{% for i in 0..rooms|length-1 %}
+	    <tr>
+		<td>{{ rooms[i].nrSali }}</td>
+		<td>{{ rooms[i].opis }}</td>
+		<td><a href="{{ url('rooms',{'id':rooms[i].id} ) }}">edytuj</a></td>
+		<td><a href="{{ url('rooms',{'id':rooms[i].id,'delete':1} ) }}">usuń</a></td>
+	    </tr>
+	{% endfor %}
+    </table>
+    {% else %}
+	brak
+    {% endif %}
+    <h2>Dodawanie/edytowanie</h2>
+    {{form(form)}}
+{% endblock %}
