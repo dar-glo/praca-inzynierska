@@ -1226,8 +1226,8 @@ class AdminController extends Controller{
 	$con->prepare($sql)->execute();
     }
     
-    public function technicalBreak(){
-	$technicalBreak=$this
+    public function technicalBreak($controller){
+	$technicalBreak=$controller
 	    ->getDoctrine()
 	    ->getRepository(Constant::class)
 	    ->findOneBy(['name'=>'technical_break']);

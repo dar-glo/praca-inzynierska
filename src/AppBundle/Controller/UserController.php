@@ -23,7 +23,7 @@ class UserController extends Controller{
      */
     public function homepageAction(){
 
-	if(AdminController::technicalBreak()) return $this->redirectToRoute('technical_break');
+	if(AdminController::technicalBreak($this)) return $this->redirectToRoute('technical_break');
 	UserController::countMessage($this);
 	return $this->render('user/homepage.html.twig');
     }
