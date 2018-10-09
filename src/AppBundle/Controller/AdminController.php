@@ -937,7 +937,6 @@ class AdminController extends Controller{
 	];
 
 	//dane do wyświetlenia !EDIT!
-
 	if($class!=(string)0 && $numberClass!=0){
 	    $class=$this
 	    ->getDoctrine()
@@ -1015,11 +1014,13 @@ class AdminController extends Controller{
 	    ->add('opis',TextType::class,['required'=>false])
 	    ->add('submit',SubmitType::class)
 	    ->getForm();
-
+	
+	$form->handleRequest($request);	
+	//walidacja
+	if($request->isMethod('post') && $form->get('poczatek')->getData()>=$form->get('koniec')->getData()){
+	    $error='Koniec nie może być wcześniejszy od początku.';
 	//dodawanie
-	if($request->isMethod('post') && $id==0){
-	    $form->handleRequest($request);
-	    
+	}else if($request->isMethod('post') && $id==0){
 	    $term=new Terminarz();
 	    $term->setSala(
 		$this->getDoctrine()
@@ -1086,6 +1087,7 @@ class AdminController extends Controller{
 	    'timeTable'=>$timeTable,
 	    'lessonHours'=>$lessonHours,
 	    'lessons'=>@$lessons,
+	    'error'=>@$error,
 	    'classes'=>$classes
 	]);
     }
