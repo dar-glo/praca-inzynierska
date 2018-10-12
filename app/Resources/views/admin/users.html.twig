@@ -2,9 +2,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Użytkownicy:</h1>
+    <h1 class="text-center">Użytkownicy:</h1>
     {% if users is not empty %}
-	<table>
+	<table class="table">
+	<thead class="thead-dark">
 	    <tr>
 		<td>Login</td>
 		<td>Typ</td>
@@ -12,6 +13,8 @@
 		<td>Edytuj</td>
 		<td>Usuń</td>
 	    </tr>
+		</thead>
+	<tbody>
 	    {% for i in 0..users|length-1 %}
 		<tr>
 		    <td>{{ users[i].login }}</td>
@@ -19,22 +22,22 @@
 		    <td>{{ users[i].mail }}</td>
 		    <td>
 			{% if users[i].typ=='uczeń' %}
-			<a href="{{ url('users',{'formType':'uczen','id':users[i].id} ) }}">
+			<a class="btn btn-outline-primary" href="{{ url('users',{'formType':'uczen','id':users[i].id} ) }}">
 			    edytuj
 			</a>
 			{% else %}
-			<a href="{{ url('users',{'formType':users[i].typ,'id':users[i].id} ) }}">
+			<a class="btn btn-outline-primary" href="{{ url('users',{'formType':users[i].typ,'id':users[i].id} ) }}">
 			    edytuj
 			</a>
 			{% endif %}
 		    </td>
 		    <td>
 			{% if users[i].typ=='uczeń' %}
-			<a href="{{ url('users',{'formType':'uczen','id':users[i].id,'delete':1} ) }}">
+			<a class="btn btn-outline-danger" href="{{ url('users',{'formType':'uczen','id':users[i].id,'delete':1} ) }}">
 			    usuń
 			</a>
 			{% else %}
-			<a href="{{ url('users',{'formType':users[i].typ,'id':users[i].id,'delete':1} ) }}">
+			<a class="btn btn-outline-danger" href="{{ url('users',{'formType':users[i].typ,'id':users[i].id,'delete':1} ) }}">
 			    usuń
 			</a>
 			{% endif %}
@@ -44,6 +47,7 @@
 	{% else %}
 	    brak
 	{% endif %}
+    </tbody>
     </table>
     
     <h1>{% if app.request.get('id')==0 %} Dodawanie {% else %} Edycja {% endif %}

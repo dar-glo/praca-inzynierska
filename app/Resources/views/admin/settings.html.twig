@@ -2,7 +2,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Ustawienia administratora</h1>
+    <h1 class="text-center">Ustawienia administratora</h1>
     Kopia bazy: <a href="{{url('database')}}">wykonaj</a>
     {{form(formDatabase)}}
     {% if technicalBreak==0 %}

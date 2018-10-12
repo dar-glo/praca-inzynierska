@@ -2,9 +2,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Klasy:</h1>
+    <h1 class="text-center">Klasy:</h1>
     {% if classes is not empty %}
-	<table>
+	<table class="table">
+	<thead class="thead-dark">
 	    <tr>
 		<td>Poziom</td>
 		<td>Klasa</td>
@@ -13,17 +14,20 @@
 		<td>Edytuj</td>
 		<td>Usuń</td>
 	    </tr>
+		</thead>
+	<tbody>
 	    {% for i in 0..classes|length-1 %}
 		<tr>
 		    <td>{{ classes[i].poziom }}</td>
 		    <td>{{ classes[i].klasa }}</td>
 		    <td>{{ classes[i].rocznik }}</td>
 		    <td>{{ classes[i].wychowawca.imie }} {{ classes[i].wychowawca.nazwisko }}</td>
-		    <td><a href="{{ url('classes',{'id':classes[i].id}) }}">edytuj</a></td>
-		    <td><a href="{{ url('classes',{'id':classes[i].id,'delete':1}) }}">usuń</a></td>
+		    <td><a class="btn btn-outline-primary" href="{{ url('classes',{'id':classes[i].id}) }}">edytuj</a></td>
+		    <td><a class="btn btn-outline-danger" href="{{ url('classes',{'id':classes[i].id,'delete':1}) }}">usuń</a></td>
 		</tr>
 	    {% endfor %}
-	</table>
+	</tbody>
+    </table>
     {% else %}
 	brak
     {% endif %}

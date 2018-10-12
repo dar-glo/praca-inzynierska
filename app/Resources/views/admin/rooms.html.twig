@@ -2,23 +2,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Przedmioty</h1>
+    <h1 class="text-center">Przedmioty</h1>
     {% if rooms is not empty %}
-    <table>
+    <table class="table">
+	<thead class="thead-dark">
 	<tr>
 	    <td>Nr sali</td>
 	    <td>Opis</td>
 	    <td>Edytuj</td>
 	    <td>Usuń</td>
 	</tr>
+	</thead>
+	<tbody>
 	{% for i in 0..rooms|length-1 %}
 	    <tr>
 		<td>{{ rooms[i].nrSali }}</td>
 		<td>{{ rooms[i].opis }}</td>
-		<td><a href="{{ url('rooms',{'id':rooms[i].id} ) }}">edytuj</a></td>
-		<td><a href="{{ url('rooms',{'id':rooms[i].id,'delete':1} ) }}">usuń</a></td>
+		<td><a class="btn btn-outline-primary" href="{{ url('rooms',{'id':rooms[i].id} ) }}">edytuj</a></td>
+		<td><a class="btn btn-outline-danger" href="{{ url('rooms',{'id':rooms[i].id,'delete':1} ) }}">usuń</a></td>
 	    </tr>
 	{% endfor %}
+    </tbody>
     </table>
     {% else %}
 	brak
